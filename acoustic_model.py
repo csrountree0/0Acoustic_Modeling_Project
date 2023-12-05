@@ -7,6 +7,9 @@ import scipy.io
 class Model:
     def __init__(self):
         self.numChannels = 0
+        self.data = 0
+        self.samplerate = 0
+
 
     #convert to wav
     def convertToWav(self, path):
@@ -21,6 +24,10 @@ class Model:
         sound.export("temp.wav", format="wav", tags={})
         self.num_channels()
 
+    # store number of channels in attribute
     def num_channels(self):
         sound = AudioSegment.from_file("temp.wav")
         self.numChannels = sound.channels
+
+    def readWav(self):
+       self.samplerate, self.data = wavfile.read("temp.wav")

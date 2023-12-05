@@ -24,5 +24,7 @@ class Controller:
             else:
                 # place file in dir so we can use it
                 self.model.placeFileInDir(file_path)
-                # check if wav is one or two channel
-                # and if wav has metadata, if so remove it
+
+        # if entered correctly then we can display the inital plot
+        self.model.readWav()
+        self.view.displayWaveform(self.model)

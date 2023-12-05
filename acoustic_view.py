@@ -4,9 +4,13 @@ import tkinter as tk
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 import numpy as np
+
+
 class View:
     def __init__(self, controller):
         self.controller = controller
+        self.root = None
+        self.loadfilebtn = None
 
     # create the inital window
     def initgui(self):
@@ -41,11 +45,13 @@ class View:
             )
             return r
 
-
-    def displayWaveform(self):
-        time = np.linspace(0., length, data.shape[0])
-        plt.plot(time, data[:, 0], label="Left channel")
-        plt.plot(time, data[:, 1], label="Right channel")
+    def displayWaveform(self, model):
+        time = np.linspace(0., model.data.shape[0] / model.samplerate, model.data.shape[0])
+        if model.numChannels == 2:
+            plt.plot(time, model.data[:, 0], label="Left channel")
+            plt.plot(time, model.data[:, 1], label="Right channel")
+        else:
+            plt.plot(time, model.data, label="Audio")
         plt.legend()
         plt.xlabel("Time [s]")
         plt.ylabel("Amplitude")
