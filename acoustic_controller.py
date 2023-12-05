@@ -22,4 +22,7 @@ class Controller:
             if file_type == "mp3":
                 self.model.convertToWav(file_path)
             else:
-                pass # whatever happens after this
+                # place file in dir so we can use it
+                self.model.placeFileInDir(file_path)
+                # check if wav is one or two channel
+                # and if wav has metadata, if so remove it

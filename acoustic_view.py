@@ -2,6 +2,8 @@
 # user can interact with that will be implemented in controller
 import tkinter as tk
 from tkinter import messagebox
+import matplotlib.pyplot as plt
+import numpy as np
 class View:
     def __init__(self, controller):
         self.controller = controller
@@ -38,3 +40,13 @@ class View:
                 icon=icon,
             )
             return r
+
+
+    def displayWaveform(self):
+        time = np.linspace(0., length, data.shape[0])
+        plt.plot(time, data[:, 0], label="Left channel")
+        plt.plot(time, data[:, 1], label="Right channel")
+        plt.legend()
+        plt.xlabel("Time [s]")
+        plt.ylabel("Amplitude")
+        plt.show()
