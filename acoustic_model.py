@@ -4,14 +4,15 @@ from pydub import AudioSegment
 from pydub.playback import play
 from scipy.io import wavfile
 import scipy.io
+
+
 class Model:
     def __init__(self):
         self.numChannels = 0
         self.data = 0
         self.samplerate = 0
-
-
-    #convert to wav
+        self.file_name = ""
+    # convert to wav
     def convertToWav(self, path):
         sound = AudioSegment.from_mp3(path)
         sound.export("temp.wav", format="wav", tags={})
@@ -30,4 +31,4 @@ class Model:
         self.numChannels = sound.channels
 
     def readWav(self):
-       self.samplerate, self.data = wavfile.read("temp.wav")
+        self.samplerate, self.data = wavfile.read("temp.wav")
