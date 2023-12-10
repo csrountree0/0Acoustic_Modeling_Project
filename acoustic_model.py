@@ -30,6 +30,8 @@ class Model:
         self.maxValueIndex = []
         # RT60 holds index for 5, 25 and RT60 time
         self.RT60Stuff = []
+        # RT60 avg -0.5
+        self.RTdiff = 0
     # convert to wav
     def convertToWav(self, path):
         sound = AudioSegment.from_mp3(path)
@@ -50,16 +52,19 @@ class Model:
 
     def readWav(self):
         self.samplerate, self.data = wavfile.read("temp.wav")
-        self.spectrum, self.freqs, self.t, self.im = plt.specgram(self.data, Fs=self.samplerate, NFFT=1024, cmap=plt.get_cmap('autumn_r'))
-        self.frequency_check(60)
-        self.frequency_check(1000)
-        self.frequency_check(5000)
-        self.calculateRT60(0)
-        self.calculateRT60(1)
-        self.calculateRT60(2)
+        if self.numChannels == 1:
+            self.spectrum, self.freqs, self.t, self.im = plt.specgram(self.data, Fs=self.samplerate, NFFT=1024, cmap=plt.get_cmap('autumn_r'))
+            self.frequency_check(250)
+            self.frequency_check(1000)
+            self.frequency_check(5000)
+            self.calculateRT60(0)
+            self.calculateRT60(1)
+            self.calculateRT60(2)
+            self.calcDiff()
+
     def find_target_freq(self, target):
         # finds first occurrence of a target frequency
-        # 60 for low
+        # 250 for low
         # 1000 for mid
         # 50000 for high
         for x in self.freqs:
@@ -73,7 +78,6 @@ class Model:
         # find the index of the first occurrence of target_freq
         # which is stored in a tuple that holds an array of indices
         index_of_freq = np.where(self.freqs == target_freq)[0][0]
-        print(index_of_freq)
         # get the data for respective frequency
         data_for_freq = self.spectrum[index_of_freq]
         # convert to dB
@@ -85,7 +89,6 @@ class Model:
     # -5 or -25 we get the closest value
     def find_nearest_value(self, a, v):
         a = np.asarray(a)
-        print(a.shape,v.shape)
         idx = (np.abs(a-v)).argmin()
         return a[idx]
 
@@ -103,10 +106,12 @@ class Model:
         # repeat for -25
         vml25 = self.dBdata[type][self.maxValueIndex[type]] -25
         vml25 = self.find_nearest_value(sliced_array, vml25)
-        print(vml5,vml25)
         iml25 = np.where(self.dBdata[type] == vml25)
         # get rt20
         rt20 = (self.t[iml5] - self.t[iml25])[0]
         # place indexes and RT60 in list
-        print(rt20*3)
         self.RT60Stuff.append([iml5, iml25, abs(rt20*3)])
+
+    def calcDiff(self):
+        print(self.RT60Stuff[0][2], self.RT60Stuff[1][2], self.RT60Stuff[2][2])
+        self.RTdiff = (self.RT60Stuff[0][2] +self.RT60Stuff[1][2]+self.RT60Stuff[2][2] / 3) - 0.5
