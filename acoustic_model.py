@@ -113,5 +113,4 @@ class Model:
         self.RT60Stuff.append([iml5, iml25, abs(rt20*3)])
 
     def calcDiff(self):
-        print(self.RT60Stuff[0][2], self.RT60Stuff[1][2], self.RT60Stuff[2][2])
         self.RTdiff = (self.RT60Stuff[0][2] +self.RT60Stuff[1][2]+self.RT60Stuff[2][2] / 3) - 0.5

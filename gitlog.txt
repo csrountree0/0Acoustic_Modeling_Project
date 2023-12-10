@@ -1,0 +1,57 @@
+commit 6abf0642740ff9804a51f9fab25500b77337a54f
+Author: csrountree0 <crountree3706@floridapoly.edu>
+Date:   Sun Dec 10 14:07:38 2023 -0500
+
+    added labels for duration of file, resonant frequency, and RT difference vs .5 seconds as well as added an extra plot to display amplitude vs frequency
+
+commit e4d61e362857fbcb150ff15544138fd530c77b69
+Author: csrountree0 <crountree3706@floridapoly.edu>
+Date:   Sat Dec 9 21:59:22 2023 -0500
+
+    Added button to switch through plots as well as implemented the 3 plots for low, mid, and high frequencies with dots indicating peak intensity and -5 and -25 intensity and calculated RT60 times for each
+
+commit 023c65e945de5199e347dd5e18da1ec330c3ba57
+Author: csrountree0 <crountree3706@floridapoly.edu>
+Date:   Wed Dec 6 16:49:30 2023 -0500
+
+    Integrated matplotlib graph into tkinter gui and set up combine plot button with no functionality yet
+
+commit 34ee37be862a656d5a698b83cc19933824d96dcb
+Author: csrountree0 <crountree3706@floridapoly.edu>
+Date:   Tue Dec 5 15:53:11 2023 -0500
+
+    acoustic_model.py- added function to read wav file and added attributes to get samplerate and store data about audio
+    
+    acoustic_view.py- able to display waveform but need to implement it into tkinter gui so we can use buttons
+    
+    acoustic_controller.py- calls for data to be read from file and displays the waveform
+
+commit ecb3effa9acc5fa789252b9f1e9e84aaa353981a
+Author: csrountree0 <crountree3706@floridapoly.edu>
+Date:   Tue Dec 5 15:14:57 2023 -0500
+
+    acoustic_model.py- added function to put wav file in current directory so we can access it easily
+    
+    acoustic_view.py- added temp function to display waveform(not working)
+    
+    acoustic_controller- added function call to add wav file to current directory
+
+commit 89620330d73c28db16a8e66f0082389b44a08a0f
+Author: csrountree0 <crountree3706@floridapoly.edu>
+Date:   Mon Dec 4 15:48:14 2023 -0500
+
+    Added window with a button which when pressed
+    will allow the user to select a file of either mp3 or wav.
+    In the case of mp3 it will be converted to wav.
+
+commit 4ebe5ad75dbe357166e445e8c90f4976c0647c49
+Author: csrountree0 <crountree3706@floridapoly.edu>
+Date:   Sun Dec 3 20:25:22 2023 -0500
+
+    renamed 3 files
+
+commit 7eebb1af5a852df76376ff956537605790669e22
+Author: csrountree0 <crountree3706@floridapoly.edu>
+Date:   Sun Dec 3 18:17:01 2023 -0500
+
+    inital commit: files with a comment to outline the purpose of each file
