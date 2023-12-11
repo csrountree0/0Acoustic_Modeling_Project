@@ -1,6 +1,7 @@
 # gui implementation such as buttons etc
 from tkinter import filedialog
 from acoustic_model import Model
+#from tkinter import Button
 
 
 class Controller:
@@ -76,4 +77,11 @@ class Controller:
 
     def Waveform(self):
         self.view.drawNextCanvas(0)
+
+    #plot spectogram
+    #def plotSpectrogram(self):
+        #self.view.displaySpectrogram(self.model)
+
+    #spectrogram_button = Button(self, text="Plot Spectrogram", command=self.controller.plotSpectrogram)
+    #spectrogram_button.pack()
 
